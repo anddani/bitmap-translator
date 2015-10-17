@@ -6,8 +6,13 @@ $("#translate").unbind("click").on('click', function(){
     console.log("translate button clicked");
     // Remove newline and take the first 32 characters
     var userString = $("#inputbox").val().replace(/^\s+|\s+$/g, '').substring(0,32);
-    var validRegex = /^([A-F0-9]{16,})$/;
+    var validRegex = /^[A-F][A-F0-9]{31,}$|^[0-9][A-F0-9]{15,}$/;
+    var regex1 = /^[0-9][A-F0-9]{15,}/;
+    var regex2 = /^(^[A-F][A-F0-9]{31,})$/;
     console.log("size: " + userString.length);
+    console.log("size: " + userString.charAt(0) + " " + userString.charAt(31));
+    console.log("validate A1111111111111111: " + regex2.test("A1111111111111111111111111111111"));
+    console.log("validate 1111111111111111: " + regex1.test("1111111111111111"));
 
     // If string is in HEX-format and at least 16 characters
     if ( validRegex.test(userString) ){
@@ -46,7 +51,7 @@ function getBitmap (text) {
         }
     };
     console.log("returnString: " + returnString);
-    return returnString;
+    return returnString.substring(0,returnString.length-1);
 }
 
 function hexToBinary(s) {
