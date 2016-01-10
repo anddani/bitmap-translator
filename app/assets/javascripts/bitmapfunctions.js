@@ -5,14 +5,24 @@ $("#description").text("jQuery works!");
 $("#translate").unbind("click").on('click', function(){
     console.log("translate button clicked");
     // Remove newline and take the first 32 characters
-    var userString = $("#inputbox").val().replace(/^\s+|\s+$/g, '').substring(0,32);
+    var userString = $("#inputbox").val().replace(/^\s+|\s+$/g, '');
+    var inputArray = userString.split('\n');
+    for (var i = 0, l = inputArray.length; i < l; i++) {
+        console.log(i + ": " + inputArray[i]);
+    }
+    if (inputArray.length > 1) {
+        var minLength = Math.min(inputArray[0].length, inputArray[1].length);
+        var tempString = "";
+        for (var i = 0; i < minLength; i++) {
+            tempString = tempString.concat(inputArray[0].charAt(i));
+            tempString = tempString.concat(inputArray[1].charAt(i));
+        }
+        userString = tempString;
+    }
+    console.log(userString);
+    userString = userString.substring(0,32);
+    console.log(userString);
     var validRegex = /^[A-F][A-F0-9]{31,}$|^[0-9][A-F0-9]{15,}$/;
-    var regex1 = /^[0-9][A-F0-9]{15,}/;
-    var regex2 = /^(^[A-F][A-F0-9]{31,})$/;
-    console.log("size: " + userString.length);
-    console.log("size: " + userString.charAt(0) + " " + userString.charAt(31));
-    console.log("validate A1111111111111111: " + regex2.test("A1111111111111111111111111111111"));
-    console.log("validate 1111111111111111: " + regex1.test("1111111111111111"));
 
     // If string is in HEX-format and at least 16 characters
     if ( validRegex.test(userString) ){
