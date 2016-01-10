@@ -22,7 +22,7 @@ $("#translate").unbind("click").on('click', function(){
     console.log(userString);
     userString = userString.substring(0,32);
     console.log(userString);
-    var validRegex = /^[A-F][A-F0-9]{31,}$|^[0-9][A-F0-9]{15,}$/;
+    var validRegex = /^[8-9A-F][A-F0-9]{31,}$|^[0-7][A-F0-9]{15,}$/;
 
     // If string is in HEX-format and at least 16 characters
     if ( validRegex.test(userString) ){
