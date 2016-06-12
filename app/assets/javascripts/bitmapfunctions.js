@@ -45,38 +45,82 @@ $("#translate").unbind("click").on('click', function() {
     }
 });
 
+// Functionality for hex conversion
 $("#convert").unbind("click").on('click', function() {
     console.log("Convert clicked");
     
     var userString = $("#inputbox-convert").val().replace(/^\s+|\s+$/g, '');
-    console.log("userString before: " + userString);
     var inputArray = userString.split('\n');
+    var retString = "";
 
-    console.log("inputarray length: " + inputArray.length);
+    // hex -> dec
     if (inputArray.length > 1) {
         userString = flattenStringArray(inputArray);
-    }
-    var positive = /^[0-9]+[cC]$/;
-    var negative = /^[0-9]+[dD]$/;
-    if (positive.test(userString)) {
-        console.log("POSITIVE STRING");
+        userString = userString.substring(0, userString.search(/[cCdD]/) + 1);
+        var positive = /^[0-9]+[cC]$/;
+        var negative = /^[0-9]+[dD]$/;
+        if (positive.test(userString)) {
+            console.log("POSITIVE STRING");
 
-        userString = userString.slice(0, -1);
+            userString = userString.slice(0, -1);
 
-        $("#error-convert").text("");
-        $("#inputbox-convert").val(parseInt(userString, 10));
-    } else if (negative.test(userString)) {
-        console.log("NEGATIVE STRING");
+            $("#error-convert").text("");
+            $("#inputbox-convert").val(parseInt(userString, 10));
+        } else if (negative.test(userString)) {
+            console.log("NEGATIVE STRING");
 
-        userString = userString.slice(0, -1);
+            userString = userString.slice(0, -1);
 
-        $("#error-convert").text("");
-        $("#inputbox-convert").val("-".concat(parseInt(userString, 10)));
+            $("#error-convert").text("");
+            $("#inputbox-convert").val("-".concat(parseInt(userString, 10)));
+        } else {
+            console.log("BAD STRING");
+            $("#error-convert").text("Not valid string");
+        }
     } else {
-        console.log("BAD STRING");
-        $("#error-convert").text("Not valid string");
+    // dec -> hex
+        console.log("bla");
+
+        var sign = "";
+        var positive = /^\+?[0-9]+$/;
+        var negative = /^-[0-9]+$/;
+        var valid
+        if (positive.test(userString)) {
+            console.log("POSITIVE STRING");
+            if (userString.charAt(0) == '+') {
+                userString = userString.substring(1);
+            }
+            sign = 'c';
+
+        } else if (negative.test(userString)) {
+            console.log("NEGATIVE STRING");
+            userString = userString.substring(1);
+            sign = 'd';
+        }
+
+        // If invalid number
+        if (sign == "") {
+            console.log("BAD STRING");
+            $("#error-convert").text("Not valid string");
+        } else {
+            var len = userString.length;
+            if (len % 2 == 0) {
+                userString = "0".concat(userString);
+            }
+
+            for (var i = 0; i < 2; i++) {
+                for (var j = i; j < userString.length; j+=2) {
+                    retString = retString.concat(userString.charAt(j));
+                }
+                if (i == 0) {
+                    retString = retString.concat("\n");
+                }
+            }
+        }
+        retString = retString.concat(sign);
+        $("#error-convert").text("");
+        $("#inputbox-convert").val(retString);
     }
-    console.log("user string:" + userString);
     
 });
 
