@@ -56,8 +56,8 @@ $("#convert").unbind("click").on('click', function() {
     if (inputArray.length > 1) {
         userString = flattenStringArray(inputArray);
     }
-    var positive = /^[0-9]+C$/;
-    var negative = /^[0-9]+D$/;
+    var positive = /^[0-9]+[cC]$/;
+    var negative = /^[0-9]+[dD]$/;
     if (positive.test(userString)) {
         console.log("POSITIVE STRING");
 
