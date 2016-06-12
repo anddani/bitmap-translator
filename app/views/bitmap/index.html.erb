@@ -2,16 +2,22 @@
     <%= javascript_include_tag "bitmapfunctions.js" %>
 <% end %>
 
-<h1 id="title">Bitmap translator</h1>
+<h1 class="title">Bitmap translator</h1>
 
-<textarea id="inputbox" rows="5" cols="50" placeholder="Enter value to
-be translated from bitmap..."></textarea>
+<textarea id="inputbox-translate" rows="5" cols="50" placeholder="Enter value to be translated from bitmap..."></textarea>
 <br\>
 <button id="translate">Translate</button>
-<button id="clear">Clear</button>
-<button id="copy">Copy to clipboard</button><br\>
-<p id="error"><p>
-<p id="debug"><p>
-</body>
+<button class="clear" id="clear-translate">Clear</button>
+<button class="copy" id="copy-translate">Copy to clipboard</button><br\>
+<p class="error" id="error-translate"><p>
+<p id="debug-translate"><p>
 
-</html>
+<h1 class="title">Cobol hexadecimal converter</h1>
+
+<textarea id="inputbox-convert" rows="5" cols="50" placeholder="Enter value to convert from hex..."></textarea>
+<br\>
+<button id="convert">Convert</button>
+<button class="clear" id="clear-convert">Clear</button>
+<button class="copy" id="copy-convert">Copy to clipboard</button><br\>
+<p id="error-convert"><p>
+<p id="debug-convert"><p>
