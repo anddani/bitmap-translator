@@ -65,14 +65,14 @@ $("#convert").unbind("click").on('click', function() {
             userString = userString.slice(0, -1);
 
             $("#error-convert").text("");
-            $("#inputbox-convert").val(parseInt(userString, 10));
+            $("#inputbox-convert").val(userString.replace(/^0+/,''));
         } else if (negative.test(userString)) {
             console.log("NEGATIVE STRING");
 
             userString = userString.slice(0, -1);
 
             $("#error-convert").text("");
-            $("#inputbox-convert").val("-".concat(parseInt(userString, 10)));
+            $("#inputbox-convert").val("-".concat(userString.replace(/^0+/,'')));
         } else {
             console.log("BAD STRING");
             $("#error-convert").text("Not valid string");
@@ -90,12 +90,12 @@ $("#convert").unbind("click").on('click', function() {
             if (userString.charAt(0) == '+') {
                 userString = userString.substring(1);
             }
-            sign = 'c';
+            sign = 'C';
 
         } else if (negative.test(userString)) {
             console.log("NEGATIVE STRING");
             userString = userString.substring(1);
-            sign = 'd';
+            sign = 'D';
         }
 
         // If invalid number
